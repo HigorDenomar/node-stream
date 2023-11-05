@@ -2,6 +2,8 @@ import csv from 'csv-parser'
 import fs from 'fs'
 import path from 'path'
 
+import { removeInvalidZipCode } from './pipes/removeInvalidZipCode'
+
 export function generateFiles(file: string) {
   const filePath = path.normalize(file)
   const { dir } = path.parse(filePath)
@@ -37,8 +39,11 @@ export function generateFiles(file: string) {
     .pipe(
       csv({
         separator: ';',
+        mapValues: (args) => args.value.trim(),
       })
     )
+    .pipe(removeInvalidZipCode)
+
     .on('end', () => {
       withValueZero.end()
       untilSix.end()
