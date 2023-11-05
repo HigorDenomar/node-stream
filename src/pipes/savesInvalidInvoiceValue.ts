@@ -10,8 +10,10 @@ export const savesInvalidInvoiceValue = (stream: WriteStream) =>
       if (Number(chunk.ValorFatura) === 0) {
         const csvRow = Object.values(chunk).join(';')
         stream.write(csvRow + '\n', 'utf8')
+        callback()
+      } else {
+        this.push(chunk)
+        callback()
       }
-
-      callback()
     },
   })
