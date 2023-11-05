@@ -8,8 +8,8 @@ export const transformAddress = new Transform({
     const customer: INewCustomerObject = {
       NomeCliente: chunk.NomeCliente,
       EnderecoCompleto: `${chunk.RuaComComplemento}, ${chunk.Bairro}, ${chunk.Cidade} - ${chunk.Estado}, ${chunk.CEP}`,
-      NumeroPaginas: chunk.NumeroPaginas,
       ValorFatura: chunk.ValorFatura,
+      NumeroPaginas: chunk.NumeroPaginas,
     }
 
     this.push(customer)
