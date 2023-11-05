@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 
 import { removeInvalidZipCode } from './pipes/removeInvalidZipCode'
+import { savesInvalidInvoiceValue } from './pipes/savesInvalidInvoiceValue'
 
 export function generateFiles(file: string) {
   const filePath = path.normalize(file)
@@ -43,7 +44,7 @@ export function generateFiles(file: string) {
       })
     )
     .pipe(removeInvalidZipCode)
-
+    .pipe(savesInvalidInvoiceValue(withValueZero))
     .on('end', () => {
       withValueZero.end()
       untilSix.end()
