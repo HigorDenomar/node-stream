@@ -38,6 +38,23 @@ export function generateFiles(file: string) {
     }
   )
 
+  withValueZero.write(
+    'NomeCliente;EnderecoCompleto;ValorFatura;NumeroPaginas\n',
+    'utf-8'
+  )
+  untilSix.write(
+    'NomeCliente;EnderecoCompleto;ValorFatura;NumeroPaginas\n',
+    'utf-8'
+  )
+  untilTwelve.write(
+    'NomeCliente;EnderecoCompleto;ValorFatura;NumeroPaginas\n',
+    'utf-8'
+  )
+  mostThanTwelve.write(
+    'NomeCliente;EnderecoCompleto;ValorFatura;NumeroPaginas\n',
+    'utf-8'
+  )
+
   fs.createReadStream(filePath)
     .pipe(
       csv({
