@@ -1,5 +1,7 @@
 import readlineSync from 'readline-sync'
 
+import { generateFiles } from './service'
+
 async function main() {
   console.log('\n** Only .txt files supported **\n')
 
@@ -11,11 +13,7 @@ async function main() {
     }
   )
 
-  const splitted = filePath.split('/')
-  splitted.pop()
-  const path = splitted.join('/')
-
-  console.log(`\nCSV files generated on: ${path}/output\n`)
+  generateFiles(filePath + '.txt')
 }
 
 main()

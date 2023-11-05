@@ -8,6 +8,7 @@
     "start:dev": "tsx --watch src/cmd.ts"
   },
   "devDependencies": {
+    "@types/node": "^20.8.10",
     "@types/readline-sync": "^1.4.6",
     "tsx": "^3.14.0",
     "typescript": "^5.2.2"
