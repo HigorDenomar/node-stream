@@ -2,6 +2,7 @@ import csv from 'csv-parser'
 import fs from 'fs'
 import path from 'path'
 
+import { removeInvalidNumberOfPages } from './pipes/removeInvalidNumberOfPages'
 import { removeInvalidZipCode } from './pipes/removeInvalidZipCode'
 import { savesInvalidInvoiceValue } from './pipes/savesInvalidInvoiceValue'
 
@@ -40,11 +41,12 @@ export function generateFiles(file: string) {
     .pipe(
       csv({
         separator: ';',
-        mapValues: (args) => args.value.trim(),
+        mapValues: (args) => args.value.trim().replace(/;/g, ','),
       })
     )
     .pipe(removeInvalidZipCode)
     .pipe(savesInvalidInvoiceValue(withValueZero))
+    .pipe(removeInvalidNumberOfPages)
     .on('end', () => {
       withValueZero.end()
       untilSix.end()
