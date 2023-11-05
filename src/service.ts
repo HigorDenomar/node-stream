@@ -1,3 +1,4 @@
+import csv from 'csv-parser'
 import fs from 'fs'
 import path from 'path'
 
@@ -32,12 +33,18 @@ export function generateFiles(file: string) {
     }
   )
 
-  fs.createReadStream(filePath).on('end', () => {
-    withValueZero.end()
-    untilSix.end()
-    untilTwelve.end()
-    mostThanTwelve.end()
+  fs.createReadStream(filePath)
+    .pipe(
+      csv({
+        separator: ';',
+      })
+    )
+    .on('end', () => {
+      withValueZero.end()
+      untilSix.end()
+      untilTwelve.end()
+      mostThanTwelve.end()
 
-    console.log(`\nCSV files generated on: ${outputDir}\n`)
-  })
+      console.log(`\nCSV files generated on: ${outputDir}\n`)
+    })
 }
