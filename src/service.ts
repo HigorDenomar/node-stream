@@ -5,6 +5,7 @@ import path from 'path'
 import { removeInvalidNumberOfPages } from './pipes/removeInvalidNumberOfPages'
 import { removeInvalidZipCode } from './pipes/removeInvalidZipCode'
 import { savesInvalidInvoiceValue } from './pipes/savesInvalidInvoiceValue'
+import { transformAddress } from './pipes/transformAddress'
 
 export function generateFiles(file: string) {
   const filePath = path.normalize(file)
@@ -45,9 +46,10 @@ export function generateFiles(file: string) {
       })
     )
     .pipe(removeInvalidZipCode)
+    .pipe(transformAddress)
     .pipe(savesInvalidInvoiceValue(withValueZero))
     .pipe(removeInvalidNumberOfPages)
-    .on('end', () => {
+    .on('finish', () => {
       withValueZero.end()
       untilSix.end()
       untilTwelve.end()

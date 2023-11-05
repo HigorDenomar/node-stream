@@ -8,3 +8,10 @@ export type ICustomerObject = {
   ValorFatura: string
   NumeroPaginas: string
 }
+
+export type INewCustomerObject = {
+  NomeCliente: string
+  EnderecoCompleto: string
+  ValorFatura: string
+  NumeroPaginas: string
+}
