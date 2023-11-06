@@ -60,6 +60,16 @@ export function generateFiles(file: string) {
     .pipe(
       csv({
         separator: ';',
+        headers: [
+          'NomeCliente',
+          'CEP',
+          'RuaComComplemento',
+          'Bairro',
+          'Cidade',
+          'Estado',
+          'ValorFatura',
+          'NumeroPaginas',
+        ],
         mapValues: (args) => args.value.trim().replace(/;/g, ','),
       })
     )
